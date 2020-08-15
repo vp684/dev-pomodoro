@@ -23,3 +23,29 @@
   border-width: 5px;
 
 }
+
+
+/* About */
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  border: steelblue;
+  border-style: solid;
+  width: 60%;
+
+
+}
+ 
+#title {
+  font-size: x-large;
+}
+
+li {
+  margin: 5px;
+  font-size: large;
+}
+
+p {
+  font-size: large;
+}

@@ -28,7 +28,7 @@ function Clock() {
         if(secs < 10 && secs > 0) secs = "0" + secs.toString()
         if(mins === 0) mins = "00"
         if(mins < 10 && mins > 0) mins = "0" + mins.toString()
-        
+
         return (mins + ":" + secs)
     }
 
@@ -54,9 +54,11 @@ function Clock() {
     return (
         <div className="clock-container">
             <div id="timer-mins"> {displayTime} </div>               
-            <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>     
-            <Button onClick={()=>{changeMins(5)}}>5 Mins</Button>       
-            <Button onClick={()=>{changeMins(25)}}>25 Mins</Button>           
+            <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>   
+            <Button onClick={()=>{changeMins(25)}}>Pomodoro</Button>      
+            <Button onClick={()=>{changeMins(5)}}>Short Break</Button>      
+             
+                  
         </div>
     )
 }
