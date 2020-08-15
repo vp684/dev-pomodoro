@@ -56,9 +56,8 @@ function Clock() {
             <div id="timer-mins"> {displayTime} </div>               
             <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>   
             <Button onClick={()=>{changeMins(25)}}>Pomodoro</Button>      
-            <Button onClick={()=>{changeMins(5)}}>Short Break</Button>      
-             
-                  
+            <Button onClick={()=>{changeMins(5)}}>Short Break</Button>     
+            <Button onClick={()=>{changeMins(20)}}>Long Break</Button>                                
         </div>
     )
 }
