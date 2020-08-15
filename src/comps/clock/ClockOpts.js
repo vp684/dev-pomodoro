@@ -1,44 +1,60 @@
 import React, { useState, useEffect } from 'react'
-import Button from '@material-ui/core/Button'
 
 import Clock from './Clock'
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 
-let currTime = new Date(2000, 0, 1, 1, 25, 0, 0).getTime()
+function valuetext(value) {
+    return `${value} Minutes`;
+  }
 
 function ClockOpts() {
-
-    const [pause, setPause] = useState(false)
-    const [start, setStart] = useState(false)        
-    const [displayTime, setDisplayTime] = useState('5:00')
-
-    const startTimer = async () => {
-        setStart(true)    
-    }
-    
-    const pauseTimer = () => {         
-        setPause(!pause)                     
-    }
-    
-    const changeMins = (mins) => {
-       
-        setPause(()=>{ return false})    
-        setStart(()=>{ return false})
-
-        currTime = new Date(2000, 0, 1, 1, mins, 0, 0).getTime()  
-        
-        setDisplayTime(mins + ":00")
-    }
-
 
 
     return (
         <div className="clock-container">
-            <Clock currTime={currTime} pause={pause} start={start} displayTime={displayTime} />
-            <Button onClick={startTimer}>Start</Button>  
-            <Button onClick={pauseTimer}>Pause</Button>  
-            <Button onClick={()=>{changeMins(5)}}>5 Mins</Button>       
-            <Button onClick={()=>{changeMins(25)}}>25 Mins</Button>       
+            <Clock />
+            <Typography id="discrete-slider" gutterBottom>
+                Pomodoro Period
+            </Typography>
+            <Slider
+                defaultValue={25}
+                getAriaValueText={valuetext}
+                aria-labelledby="discrete-slider"
+                valueLabelDisplay="auto"
+                step={5}
+                marks
+                min={15}
+                max={35}
+            />
+            <Typography id="discrete-slider" gutterBottom>
+                Short Break Period
+            </Typography>
+            <Slider
+                defaultValue={3}
+                getAriaValueText={valuetext}
+                aria-labelledby="discrete-slider"
+                valueLabelDisplay="auto"
+                step={1}
+                marks
+                min={3}
+                max={10}
+            />
+            <Typography id="discrete-slider" gutterBottom>
+                Long Break Period
+            </Typography>
+            <Slider
+                defaultValue={20}
+                getAriaValueText={valuetext}
+                aria-labelledby="discrete-slider"
+                valueLabelDisplay="auto"
+                step={5}
+                marks
+                min={10}
+                max={30}
+            />
+  
         </div>
     )
 }

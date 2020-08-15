@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="app">
       <p id="title">Pomodoro Timer</p>
-      <Clock className="clock"/>
+      <ClockOpts className="clock"/>
       <About/>
     </div>
   );
