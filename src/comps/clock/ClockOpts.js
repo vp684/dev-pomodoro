@@ -32,7 +32,7 @@ function ClockOpts() {
                 Short Break Period
             </Typography>
             <Slider
-                defaultValue={3}
+                defaultValue={5}
                 getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay="auto"
@@ -51,7 +51,7 @@ function ClockOpts() {
                 valueLabelDisplay="auto"
                 step={5}
                 marks
-                min={10}
+                min={15}
                 max={30}
             />
   
