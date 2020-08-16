@@ -4,9 +4,9 @@ import Button from '@material-ui/core/Button'
 
 let currTime = new Date(2000, 0, 1, 1, 25, 0, 0).getTime()
 
-function Clock() {   
+function Clock(props) {   
     const [pause, setPause] = useState(true)   
-    const [duration, setDuration] = useState(true)
+    const [duration, setDuration] = useState(true)  
     
     const toggleTimer = () => {         
         setPause(!pause)                     
@@ -56,9 +56,9 @@ function Clock() {
         <div className="clock-container">
             <div id="timer-mins"> {displayTime} </div>               
             <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>   
-            <Button onClick={()=>{changeMins(25)}}>Pomodoro</Button>      
-            <Button onClick={()=>{changeMins(5)}}>Short Break</Button>     
-            <Button onClick={()=>{changeMins(20)}}>Long Break</Button>                                
+            <Button onClick={()=>{changeMins(props.pomo)}}>Pomodoro</Button>      
+            <Button onClick={()=>{changeMins(props.short)}}>Short Break</Button>     
+            <Button onClick={()=>{changeMins(props.long)}}>Long Break</Button>                                
         </div>
     )
 }

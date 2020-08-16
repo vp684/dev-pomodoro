@@ -11,10 +11,26 @@ function valuetext(value) {
 
 function ClockOpts() {
 
+    const [pomo, changePomo] = useState(25)
+    const [short, changeShort] = useState(5)
+    const [long, changeLong] = useState(20)
+  
+
+    const PomoPeriod = (e, val) => {
+        changePomo(val)        
+    }
+
+    const ShortPeriod = (e, val) => {
+        changeShort(val) 
+    }
+
+    const LongPeriod = (e, val) => {
+        changeLong(val) 
+    }
 
     return (
         <div className="clock-container">
-            <Clock />
+            <Clock pomo={pomo} short={short} long={long}/>
             <Typography id="discrete-slider" gutterBottom>
                 Pomodoro Period
             </Typography>
@@ -23,6 +39,7 @@ function ClockOpts() {
                 getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay="auto"
+                onChange={PomoPeriod}
                 step={5}
                 marks
                 min={15}
@@ -36,6 +53,7 @@ function ClockOpts() {
                 getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay="auto"
+                onChange={ShortPeriod}
                 step={1}
                 marks
                 min={3}
@@ -49,6 +67,7 @@ function ClockOpts() {
                 getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay="auto"
+                onChange={LongPeriod}
                 step={5}
                 marks
                 min={15}
