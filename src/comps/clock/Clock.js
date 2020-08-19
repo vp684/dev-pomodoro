@@ -2,11 +2,15 @@ import React, { useState, useEffect } from 'react'
 
 import Button from '@material-ui/core/Button'
 
+import Alert from '../alert/Alert'
+
 let currTime = new Date(2000, 0, 1, 1, 25, 0, 0).getTime()
 
-function Clock(props) {   
+function Clock(props) {  
+
     const [pause, setPause] = useState(true)   
     const [duration, setDuration] = useState(true)  
+    const [showalert, setAlert] = useState(false)
     
     const toggleTimer = () => {         
         setPause(!pause)                     
@@ -24,6 +28,7 @@ function Clock(props) {
 
         if(mins === 0 && secs === 0){
             setPause(true)
+            setAlert(true)
         }
         if(secs === 0) secs = "00"
         if(secs < 10 && secs > 0) secs = "0" + secs.toString()
@@ -53,12 +58,16 @@ function Clock(props) {
     }, [pause, duration, displayTime])
 
     return (
-        <div className="clock-container">
+        <div className="clock flex-col-center">
             <div id="timer-mins"> {displayTime} </div>               
             <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>   
             <Button onClick={()=>{changeMins(props.pomo)}}>Pomodoro</Button>      
             <Button onClick={()=>{changeMins(props.short)}}>Short Break</Button>     
-            <Button onClick={()=>{changeMins(props.long)}}>Long Break</Button>                                
+            <Button onClick={()=>{changeMins(props.long)}}>Long Break</Button>     
+
+            {showalert && <Alert/>}
+            
+                                  
         </div>
     )
 }

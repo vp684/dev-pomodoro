@@ -10,7 +10,7 @@ function About() {
                 <li>Decide on the task to be done.</li>
                 <li>Set the pomodoro timer to 15-35 minutes.</li>
                 <li>Work on the task.</li>
-                <li>End work when the timer rings and put a checkmark on a piece of paper.</li>
+                <li>End work when the timer rings record a checkmark for the task.</li>
                 
                 <li>If you have fewer than four checkmarks, take a short break (3–10 minutes) and
                      then return to step 2; otherwise continue to step 6.</li>

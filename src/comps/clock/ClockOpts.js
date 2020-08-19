@@ -13,7 +13,7 @@ function ClockOpts() {
 
     const [pomo, changePomo] = useState(25)
     const [short, changeShort] = useState(5)
-    const [long, changeLong] = useState(20)
+    const [long, changeLong] = useState(20)    
   
 
     const PomoPeriod = (e, val) => {
@@ -29,7 +29,7 @@ function ClockOpts() {
     }
 
     return (
-        <div className="clock-container">
+        <div className="clock-opts">
             <Clock pomo={pomo} short={short} long={long}/>
             <Typography id="discrete-slider" gutterBottom>
                 Pomodoro Period
