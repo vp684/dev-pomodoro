@@ -10,7 +10,7 @@ function Clock(props) {
 
     const [pause, setPause] = useState(true)   
     const [duration, setDuration] = useState(true)  
-    const [showalert, setAlert] = useState(false)
+    const [showalert, setAlert] = useState(true)
     
     const toggleTimer = () => {         
         setPause(!pause)                     
