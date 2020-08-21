@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import Clock from './Clock'
+import Tasks from '../tasks/Tasks'
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
@@ -73,7 +74,7 @@ function ClockOpts() {
                 min={15}
                 max={30}
             />
-  
+            <Tasks />                
         </div>
     )
 }
