@@ -10,7 +10,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 
-function Tasks() {
+function Tasks(props) {
     const [tasklist, setTask] = useState([])
     const [task, setTaskName] = useState('')
 
