@@ -4,7 +4,7 @@ function About() {
     return (
         <div className="about-container">
             <h2>The Pomodoro Technique</h2>
-            <p>A Pomodoro clock can be used to break time spent working on a task into intervals of about 25 minutes 
+            <p>A Pomodoro clock can be used to split time spent working on a task into intervals of about 25 minutes 
                 followed by small breaks of about 5 minutes</p>
             <ol>        
                 <li>Decide on the task to be done.</li>

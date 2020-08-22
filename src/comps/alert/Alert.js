@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 
-function Alert() {
-    
+function Alert(props) {
+
 
     return (
-        <div className="alert">
+        <div className="alert flex-col-center">
             <strong>Pomodoro period complete.</strong>
-            <Button> <strong>OK</strong> </Button>
+            <Button onClick={props.alert}> <strong>Add check mark to task</strong> </Button>
         </div>
     )
 }

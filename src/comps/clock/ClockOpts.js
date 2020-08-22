@@ -23,14 +23,9 @@ function ClockOpts() {
     const [short, changeShort] = useState(1)
     const [long, changeLong] = useState(1)    
 
-
     const [pause, setPause] = useState(true)   
     const [duration, setDuration] = useState(25)  
-    const [showalert, setAlert] = useState(true)
-
-
- 
-  
+    const [showalert, setAlert] = useState(true)   
 
     const PomoPeriod = (e, val) => {
         changePomo(val)        
@@ -43,7 +38,6 @@ function ClockOpts() {
     const LongPeriod = (e, val) => {
         changeLong(val) 
     }
-
     
     const toggleTimer = () => {         
         setPause(!pause)                     
@@ -77,6 +71,11 @@ function ClockOpts() {
         return (mins + ":" + secs)
     }
 
+    const clearAlert = () => {
+        setAlert(false)
+        
+    }
+
     const [displayTime, setDisplayTime] = useState(calcTime())
 
     useEffect(() =>{               
@@ -99,12 +98,13 @@ function ClockOpts() {
     return (
         <div className="clock-opts">
             <Clock pomo={pomo} short={short} long={long} time={displayTime}/>
+
             <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>   
             <Button onClick={()=>{changeMins(pomo)}}>Pomodoro</Button>      
             <Button onClick={()=>{changeMins(short )}}>Short Break</Button>     
             <Button onClick={()=>{changeMins(long )}}>Long Break</Button>     
 
-            {showalert && <Alert/>}
+            {showalert && <Alert alert={clearAlert}/>}
             
             <Typography id="discrete-slider" gutterBottom>
                 Pomodoro Period
