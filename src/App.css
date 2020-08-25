@@ -47,10 +47,6 @@
 /* Alert */
 
 .alert {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: rgb(32, 163, 49);
   padding: 1vh;
   border-radius: 5px;

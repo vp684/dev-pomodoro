@@ -10,9 +10,14 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+
+
+
 function Tasks(props) {
     const [tasklist, setTask] = useState([])
     const [task, setTaskName] = useState('')
+    
 
     const addTask = (e) =>{
         e.preventDefault()  
@@ -28,7 +33,6 @@ function Tasks(props) {
 
     const removeTask = (index) => {
         let updatedTasks = [...tasklist]
-
         updatedTasks.splice(index, 1)
         setTask(updatedTasks)
     }
@@ -47,6 +51,9 @@ function Tasks(props) {
                         <div key={i}>
                             <ListItem>
                                 <ListItemText primary={val}/>   
+                                {props.checks.map((item, j) => {
+                                    return(<CheckCircleOutlineIcon key={j}/>)
+                                })}
                                 <ListItemSecondaryAction onClick={()=>{removeTask(i)}}>
                                     <IconButton edge="end" aria-label="delete" >
                                         <DeleteIcon />

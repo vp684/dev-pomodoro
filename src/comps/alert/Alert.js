@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 
-function Alert(props) {
-
-
+function Alert (props){
     return (
         <div className="alert flex-col-center">
             <strong>Pomodoro period complete.</strong>

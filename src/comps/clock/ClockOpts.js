@@ -12,11 +12,6 @@ import Alert from '../alert/Alert'
 
 let currTime = new Date(2000, 0, 1, 1, 25, 0, 0).getTime()
 
-
-function valuetext(value) {
-    return `${value} Minutes`;
-  }
-
 function ClockOpts() {
 
     const [pomo, changePomo] = useState(1)
@@ -25,7 +20,9 @@ function ClockOpts() {
 
     const [pause, setPause] = useState(true)   
     const [duration, setDuration] = useState(25)  
-    const [showalert, setAlert] = useState(true)   
+    const [showalert, setAlert] = useState(true)  
+    
+    const [checks, setChecks] = useState([1,1,1])
 
     const PomoPeriod = (e, val) => {
         changePomo(val)        
@@ -52,7 +49,7 @@ function ClockOpts() {
     const calcTime = (time) => {
         let mins = new Date(time).getMinutes()
         let secs = new Date(time).getSeconds()
-
+        
         if(mins === 0 && secs === 0){
             setPause(true)
             setAlert(true)
@@ -71,9 +68,14 @@ function ClockOpts() {
         return (mins + ":" + secs)
     }
 
-    const clearAlert = () => {
+    const finishPomoPeriod = () => {
         setAlert(false)
-        
+        if(checks.length < 4){
+            setChecks([...checks, 1])
+        }else{
+            setChecks([])
+        }
+
     }
 
     const [displayTime, setDisplayTime] = useState(calcTime())
@@ -100,18 +102,17 @@ function ClockOpts() {
             <Clock pomo={pomo} short={short} long={long} time={displayTime}/>
 
             <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>   
-            <Button onClick={()=>{changeMins(pomo)}}>Pomodoro</Button>      
-            <Button onClick={()=>{changeMins(short )}}>Short Break</Button>     
-            <Button onClick={()=>{changeMins(long )}}>Long Break</Button>     
+            <Button onClick={()=>{changeMins(pomo, "pomo")}}>Pomodoro</Button>      
+            <Button onClick={()=>{changeMins(short, "short" )}}>Short Break</Button>     
+            <Button onClick={()=>{changeMins(long, "long" )}}>Long Break</Button>     
 
-            {showalert && <Alert alert={clearAlert}/>}
+            {showalert && <Alert alert={finishPomoPeriod}/>}
             
             <Typography id="discrete-slider" gutterBottom>
                 Pomodoro Period
             </Typography>
             <Slider
                 defaultValue={25}
-                getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay="auto"
                 onChange={PomoPeriod}
@@ -125,7 +126,6 @@ function ClockOpts() {
             </Typography>
             <Slider
                 defaultValue={5}
-                getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay="auto"
                 onChange={ShortPeriod}
@@ -139,7 +139,6 @@ function ClockOpts() {
             </Typography>
             <Slider
                 defaultValue={20}
-                getAriaValueText={valuetext}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay="auto"
                 onChange={LongPeriod}
@@ -148,7 +147,7 @@ function ClockOpts() {
                 min={15}
                 max={30}
             />
-            <Tasks />                
+            <Tasks checks={checks}/>                
         </div>
     )
 }
