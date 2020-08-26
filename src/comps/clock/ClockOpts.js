@@ -5,8 +5,6 @@ import Tasks from '../tasks/Tasks'
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
-import Button from '@material-ui/core/Button'
-
 import Alert from '../alert/Alert'
 
 
@@ -19,7 +17,7 @@ function ClockOpts() {
     const [long, changeLong] = useState(1)    
 
     const [pause, setPause] = useState(true)   
-    const [duration, setDuration] = useState(25)  
+    const [duration, setDuration] = useState("pomo")  
     const [showalert, setAlert] = useState(true)  
     
     const [checks, setChecks] = useState([1,1,1])
@@ -101,12 +99,16 @@ function ClockOpts() {
         <div className="clock-opts">
             <Clock pomo={pomo} short={short} long={long} time={displayTime}/>
 
-            <Button onClick={toggleTimer}>{pause ? "Start": "Pause"}</Button>   
-            <Button onClick={()=>{changeMins(pomo, "pomo")}}>Pomodoro</Button>      
-            <Button onClick={()=>{changeMins(short, "short" )}}>Short Break</Button>     
-            <Button onClick={()=>{changeMins(long, "long" )}}>Long Break</Button>     
+            <div className="flex-col-center">
+                <button onClick={toggleTimer} className="btn lrg-btn">{pause ? "Start": "Pause"}</button>                   
+                <button onClick={()=>{changeMins(pomo, "pomo")}} className="btn lrg-btn">Pomodoro</button>      
+                <button onClick={()=>{changeMins(short, "short" )}} className="btn lrg-btn">Short Break</button>     
+                <button onClick={()=>{changeMins(long, "long" )}} className="btn lrg-btn">Long Break</button>  
+                {showalert && <Alert alert={finishPomoPeriod}/>}
+            </div>
+               
 
-            {showalert && <Alert alert={finishPomoPeriod}/>}
+            
             
             <Typography id="discrete-slider" gutterBottom>
                 Pomodoro Period

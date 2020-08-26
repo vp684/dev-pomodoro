@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
 import List from '@material-ui/core/List'
@@ -39,10 +38,14 @@ function Tasks(props) {
 
     return (
         <div>
-            <form onSubmit={addTask}>
+            <form onSubmit={addTask} className="flex-col-center">
                 <strong>Add tasks in the order you want to work on them</strong>
-                <TextField variant="outlined" onChange={updateTaskName} id="task-input" value={task} label="task"/>
-                <Button type="submit">Add</Button>
+                <div className="flex-row-center mrgn" >                  
+                    <TextField variant="outlined" onChange={updateTaskName} id="task-input" value={task} label="task"/>
+                    <button type="submit" className="btn med-btn">Add</button>
+                </div>
+                
+             
             </form>
 
             <List>
