@@ -4,12 +4,20 @@
   justify-content: center;
   align-items: center;
 }
+
+.flex-row-center {
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 /* App */
 
 .app {
   background-color:rgb(255, 99, 71);
   height: 100%;
   width: 100%;
+  min-width: 300px;
 }
 
 
@@ -43,7 +51,37 @@
 
 
 }
+
+/* Alert */
+
+.alert {
+  background-color: rgb(32, 163, 49);
+  padding: 1vh;
+  border-radius: 5px;
+  max-width: 500px; 
+  min-width: 233px;
+  margin: 2vh;
+}
  
+
+/* Tasks */
+
+.btn {
+  border-radius: 5px;
+  border-style: solid; 
+  margin: 5px; 
+}
+
+.med-btn {
+  width:10vh;
+  height: 4vh;
+}
+
+.lrg-btn {
+  width: 12vh;
+  height: 5vh;
+}
+
 #title {
   font-size: x-large;
   margin: 5%;
@@ -56,4 +94,8 @@ li {
 
 p {
   font-size: large;
+}
+
+.mrgn {
+  margin: 3vh;
 }
