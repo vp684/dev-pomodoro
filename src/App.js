@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 
 import ClockOpts from './comps/clock/ClockOpts'
-import Clock from './comps/clock/Clock'
 import About from './comps/about/About'
 
 function App() {

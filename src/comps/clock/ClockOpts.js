@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react'
-
 import Clock from './Clock'
 import Tasks from '../tasks/Tasks'
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-
 import Alert from '../alert/Alert'
-
 
 let currTime = new Date(2000, 0, 1, 1, 25, 0, 0).getTime()
 
 function ClockOpts() {
 
-    const [pomo, changePomo] = useState(1)
-    const [short, changeShort] = useState(1)
-    const [long, changeLong] = useState(1)    
+    const [pomo, changePomo] = useState(25)
+    const [short, changeShort] = useState(5)
+    const [long, changeLong] = useState(20)    
 
     const [pause, setPause] = useState(true)   
     const [duration, setDuration] = useState("pomo")  
-    const [showalert, setAlert] = useState(true)  
+    const [showalert, setAlert] = useState(false)  
     
-    const [checks, setChecks] = useState([1,1,1])
+    const [checks, setChecks] = useState([])
+
+    
 
     const PomoPeriod = (e, val) => {
+        console.log(val)
         changePomo(val)        
     }
 
@@ -41,7 +41,9 @@ function ClockOpts() {
     const changeMins = (mins, type) => {  
         currTime = new Date(2020, 0, 1, 1, mins, 0, 0).getTime()  
         setPause(true)
-        setDuration(type)                                 
+        setDuration(type)  
+        let x_time = calcTime(currTime)         
+        setDisplayTime(x_time)                                
     }
 
     const calcTime = (time) => {
@@ -49,12 +51,11 @@ function ClockOpts() {
         let secs = new Date(time).getSeconds()
         
         if(mins === 0 && secs === 0){
-            setPause(true)
-            setAlert(true)
-
+            setPause(true)           
             if(duration === "pomo"){
                 console.log('alert')
-
+                setAlert(true)
+                //reset timer 
             }
         }
         if(secs === 0) secs = "00"
@@ -66,6 +67,8 @@ function ClockOpts() {
         return (mins + ":" + secs)
     }
 
+    const [displayTime, setDisplayTime] = useState(calcTime())
+
     const finishPomoPeriod = () => {
         setAlert(false)
         if(checks.length < 4){
@@ -75,9 +78,7 @@ function ClockOpts() {
         }
 
     }
-
-    const [displayTime, setDisplayTime] = useState(calcTime())
-
+    
     useEffect(() =>{               
         
         if(!pause){
@@ -105,10 +106,7 @@ function ClockOpts() {
                 <button onClick={()=>{changeMins(short, "short" )}} className="btn lrg-btn">Short Break</button>     
                 <button onClick={()=>{changeMins(long, "long" )}} className="btn lrg-btn">Long Break</button>  
                 {showalert && <Alert alert={finishPomoPeriod}/>}
-            </div>
-               
-
-            
+            </div>                           
             
             <Typography id="discrete-slider" gutterBottom>
                 Pomodoro Period
