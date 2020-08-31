@@ -105,7 +105,7 @@ function ClockOpts() {
 
     return (
         <div className="clock-opts">
-            <Clock pomo={pomo} short={short} long={long} time={displayTime}/>
+            <Clock period={duration} time={displayTime}/>
 
             <div className="flex-col-center">
                 <button onClick={toggleTimer} className="btn lrg-btn">{pause ? "Start": "Pause"}</button>                   

@@ -47,12 +47,12 @@ function Tasks(props) {
                 
              
             </form>
-            
+
             <List>
                 {tasklist.map((val, i) => {
                     return (
                         <div key={i}>
-                            <ListItem>
+                            <ListItem >
                                 <ListItemText primary={val}/>   
                                 {props.checks.map((item, j) => {
                                     return(<CheckCircleOutlineIcon key={j}/>)
