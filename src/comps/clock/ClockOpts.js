@@ -9,13 +9,14 @@ let currTime = new Date(2000, 0, 1, 1, 25, 0, 0).getTime()
 
 function ClockOpts() {
 
-    const [pomo, changePomo] = useState(25)
-    const [short, changeShort] = useState(5)
-    const [long, changeLong] = useState(20)    
+    const [pomo, changePomo] = useState(1)
+    const [short, changeShort] = useState(1)
+    const [long, changeLong] = useState(1)    
 
     const [pause, setPause] = useState(true)   
     const [duration, setDuration] = useState("pomo")  
     const [showalert, setAlert] = useState(false)  
+    const [alerttext, setAlertText] = useState({text:""})
     
     const [checks, setChecks] = useState([])
 
@@ -52,11 +53,23 @@ function ClockOpts() {
         
         if(mins === 0 && secs === 0){
             setPause(true)           
-            if(duration === "pomo"){
-                console.log('alert')
-                setAlert(true)
-                //reset timer 
+            if(duration === "pomo"){                                      
+                if(checks.length < 4){
+                    setChecks([...checks, 1])
+                    setAlertText({text:"Pomodoro period complete. Add check and start a short break"})
+                }     
+                if(checks.length > 3){
+                    setChecks([])
+                    setAlertText({text:"Four Pomodoro periods completed. Clear checks and start a long break"})
+                }                          
             }
+            if(duration === "short"){
+                setAlertText({text:"Small break completed. Start another pomodoro period."})
+            }
+            if(duration === "long"){
+                setAlertText({text:"Long break completed. Reset Checks and start a Pomodoro period."})
+            }
+            setAlert(true) 
         }
         if(secs === 0) secs = "00"
         if(secs < 10 && secs > 0) secs = "0" + secs.toString()
@@ -70,13 +83,7 @@ function ClockOpts() {
     const [displayTime, setDisplayTime] = useState(calcTime())
 
     const finishPomoPeriod = () => {
-        setAlert(false)
-        if(checks.length < 4){
-            setChecks([...checks, 1])
-        }else{
-            setChecks([])
-        }
-
+        setAlert(false)              
     }
     
     useEffect(() =>{               
@@ -105,7 +112,7 @@ function ClockOpts() {
                 <button onClick={()=>{changeMins(pomo, "pomo")}} className="btn lrg-btn">Pomodoro</button>      
                 <button onClick={()=>{changeMins(short, "short" )}} className="btn lrg-btn">Short Break</button>     
                 <button onClick={()=>{changeMins(long, "long" )}} className="btn lrg-btn">Long Break</button>  
-                {showalert && <Alert alert={finishPomoPeriod}/>}
+                {showalert && <Alert alert={finishPomoPeriod} text={alerttext.text}/>}
             </div>                           
             
             <Typography id="discrete-slider" gutterBottom>
