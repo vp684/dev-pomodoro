@@ -24,7 +24,6 @@ function ClockOpts() {
 
 
     const PomoPeriod = (e, val) => {
-        console.log(val)
         changePomo(val)        
     }
 
@@ -61,7 +60,6 @@ function ClockOpts() {
                     changeMins(long, "long")
                 }                                    
                 if(checks.length < 3){
-                    console.log('here') 
                     setChecks([...checks, 1])                   
                     setAlertText({text:"Pomodoro period complete. Add check and start a short break"})
                     changeMins(short, "short")
@@ -89,9 +87,7 @@ function ClockOpts() {
 
         return (mins + ":" + secs)
     }  
-    
-  
-
+      
     const [displayTime, setDisplayTime] = useState(calcTime())
 
     const finishPomoPeriod = () => {
