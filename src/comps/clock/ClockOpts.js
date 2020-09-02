@@ -18,7 +18,7 @@ function ClockOpts() {
     const [showalert, setAlert] = useState(false)  
     const [alerttext, setAlertText] = useState({text:""})
     
-    const [checks, setChecks] = useState([1,1,1])
+    const [checks, setChecks] = useState([])
 
     const [active_task, setActiveTask] = useState('')
 
@@ -54,18 +54,19 @@ function ClockOpts() {
         
         if(mins === 0 && secs === 0){
             setPause(true)           
-            if(duration === "pomo"){                                      
+            if(duration === "pomo"){    
+                if(checks.length === 3){
+                    setChecks([...checks, 1])
+                    setAlertText({text:"Four Pomodoro periods completed. Start a long break"})
+                    changeMins(long, "long")
+                }                                    
                 if(checks.length < 3){
                     console.log('here') 
                     setChecks([...checks, 1])                   
                     setAlertText({text:"Pomodoro period complete. Add check and start a short break"})
                     changeMins(short, "short")
                 }  
-                if(checks.length === 3){
-                    setChecks([...checks, 1])
-                    setAlertText({text:"Four Pomodoro periods completed. Start a long break"})
-                    changeMins(long, "long")
-                }                                         
+                                                      
             }
             if(duration === "short"){
                 setAlertText({text:"Small break completed. Start another pomodoro period."})
@@ -98,8 +99,7 @@ function ClockOpts() {
     }
     
     useEffect(() =>{  
-                   
-        
+                           
         if(!pause){
             //subtract 1 sec and set new display time           
             currTime -= 1000
