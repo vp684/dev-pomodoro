@@ -18,9 +18,10 @@ function ClockOpts() {
     const [showalert, setAlert] = useState(false)  
     const [alerttext, setAlertText] = useState({text:""})
     
-    const [checks, setChecks] = useState([])
+    const [checks, setChecks] = useState([1,1,1])
 
-    
+    const [active_task, setActiveTask] = useState('')
+
 
     const PomoPeriod = (e, val) => {
         console.log(val)
@@ -54,20 +55,28 @@ function ClockOpts() {
         if(mins === 0 && secs === 0){
             setPause(true)           
             if(duration === "pomo"){                                      
-                if(checks.length < 4){
-                    setChecks([...checks, 1])
+                if(checks.length < 3){
+                    console.log('here') 
+                    setChecks([...checks, 1])                   
                     setAlertText({text:"Pomodoro period complete. Add check and start a short break"})
-                }     
-                if(checks.length > 3){
-                    setChecks([])
-                    setAlertText({text:"Four Pomodoro periods completed. Clear checks and start a long break"})
-                }                          
+                    changeMins(short, "short")
+                }  
+                if(checks.length === 3){
+                    setChecks([...checks, 1])
+                    setAlertText({text:"Four Pomodoro periods completed. Start a long break"})
+                    changeMins(long, "long")
+                }                                         
             }
             if(duration === "short"){
                 setAlertText({text:"Small break completed. Start another pomodoro period."})
+                changeMins(pomo, "pomo")
             }
             if(duration === "long"){
+                if(checks.length > 3){
+                    setChecks([])
+                }
                 setAlertText({text:"Long break completed. Reset Checks and start a Pomodoro period."})
+                changeMins(pomo, "pomo")
             }
             setAlert(true) 
         }
@@ -78,7 +87,9 @@ function ClockOpts() {
         if(mins < 10 && mins > 0) mins = "0" + mins.toString()                
 
         return (mins + ":" + secs)
-    }
+    }  
+    
+  
 
     const [displayTime, setDisplayTime] = useState(calcTime())
 
@@ -86,7 +97,8 @@ function ClockOpts() {
         setAlert(false)              
     }
     
-    useEffect(() =>{               
+    useEffect(() =>{  
+                   
         
         if(!pause){
             //subtract 1 sec and set new display time           
@@ -99,9 +111,10 @@ function ClockOpts() {
             // total mins changed
             let x_time = calcTime(currTime)         
             setDisplayTime(x_time) 
-        }                       
-                                     
-    }, [pause, duration, displayTime])
+        }              
+                           
+    }, 
+    [pause, duration, displayTime])
 
     return (
         <div className="clock-opts">
