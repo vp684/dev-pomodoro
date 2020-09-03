@@ -6,7 +6,7 @@
 }
 
 .flex-row-center {
-  display: flex; 
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -14,20 +14,16 @@
 /* App */
 
 .app {
-  background-color:rgb(255, 99, 71);
+  background-color: rgb(255, 99, 71);
   height: 100%;
   width: 100%;
   min-width: 300px;
 }
 
-
-
 /* Clock  */
-
 
 .clock {
   margin: 5%;
-
 }
 
 #pomo-period {
@@ -39,9 +35,8 @@
   width: 75%;
   border: turquoise;
   border-style: solid;
-  border-width: 5px;  
+  border-width: 5px;
 }
-
 
 /* About */
 
@@ -52,8 +47,6 @@
   border-style: solid;
   width: 60%;
   padding: 1%;
-
-
 }
 
 /* Alert */
@@ -62,22 +55,21 @@
   background-color: rgb(32, 163, 49);
   padding: 1vh;
   border-radius: 5px;
-  max-width: 500px; 
+  max-width: 500px;
   min-width: 233px;
   margin: 2vh;
 }
- 
 
 /* Tasks */
 
 .btn {
   border-radius: 5px;
-  border-style: solid; 
-  margin: 5px; 
+  border-style: solid;
+  margin: 5px;
 }
 
 .med-btn {
-  width:10vh;
+  width: 10vh;
   height: 4vh;
 }
 
