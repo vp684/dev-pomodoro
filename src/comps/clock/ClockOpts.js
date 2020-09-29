@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Alert from "../alert/Alert";
 
-let currTime = new Date(2000, 0, 1, 1, 25, 0, 0).getTime();
+let currTime = new Date(2000, 0, 1, 1, 0, 5, 0).getTime();
 
 function ClockOpts() {
   const [pomo, changePomo] = useState(1);
@@ -19,6 +19,8 @@ function ClockOpts() {
 
   const [checks, setChecks] = useState([]);
 
+  const [tasklist, setTask] = useState([]);
+  const [task, setTaskName] = useState("");
   const [active_task, setActiveTask] = useState("");
 
   const PomoPeriod = (e, val) => {
@@ -37,8 +39,26 @@ function ClockOpts() {
     setPause(!pause);
   };
 
+  const addTask = (e) => {
+    e.preventDefault();
+    if (task !== "" && !tasklist.includes(task)) {
+      setTask([...tasklist, task]);
+    }
+    setTaskName("");
+  };
+
+  const updateTaskName = (e) => {
+    setTaskName(e.target.value);
+  };
+
+  const removeTask = (index) => {
+    let updatedTasks = [...tasklist];
+    updatedTasks.splice(index, 1);
+    setTask(updatedTasks);
+  };
+
   const changeMins = (mins, type) => {
-    currTime = new Date(2020, 0, 1, 1, mins, 0, 0).getTime();
+    currTime = new Date(2020, 0, 1, 1, 0, 3, 0).getTime();
     setPause(true);
     setDuration(type);
     let x_time = calcTime(currTime);
@@ -49,16 +69,16 @@ function ClockOpts() {
     let mins = new Date(time).getMinutes();
     let secs = new Date(time).getSeconds();
 
-    if (mins === 0 && secs === 0) {
+    if (mins === 0 && secs === 0) {   
       setPause(true);
       if (duration === "pomo") {
         if (checks.length === 3) {
-          setChecks([...checks, 1]);
+          if(tasklist.length > 0) setChecks([...checks, 1]);          
           setAlertText({ text: "Four Pomodoro periods completed. Start a long break" });
           changeMins(long, "long");
         }
-        if (checks.length < 3) {
-          setChecks([...checks, 1]);
+        if (checks.length < 3) {          
+          if(tasklist.length > 0) setChecks([...checks, 1]);
           setAlertText({ text: "Pomodoro period complete. Add check and start a short break" });
           changeMins(short, "short");
         }
@@ -69,13 +89,16 @@ function ClockOpts() {
       }
       if (duration === "long") {
         if (checks.length > 3) {
-          setChecks([]);
+          if(tasklist.length > 0) setChecks([]);
         }
         setAlertText({ text: "Long break completed. Reset Checks and start a Pomodoro period." });
         changeMins(pomo, "pomo");
       }
       setAlert(true);
     }
+    
+
+    console.log(time)
     if (secs === 0) secs = "00";
     if (secs < 10 && secs > 0) secs = "0" + secs.toString();
 
@@ -180,7 +203,14 @@ function ClockOpts() {
         min={15}
         max={30}
       />
-      <Tasks checks={checks} />
+      <Tasks 
+        checks={checks}  
+        addTask={addTask} 
+        updateTaskName={updateTaskName} 
+        removeTask={removeTask} 
+        task={task} 
+        tasklist={tasklist}
+      />
     </div>
   );
 }

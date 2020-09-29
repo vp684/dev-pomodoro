@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Tomato from "../tomato/Tomato"
 
 function Clock(props) {
   const [period, setPeriod] = useState("");
-
   useEffect(() => {
     if (props.period === "pomo") {
       setPeriod("Pomodoro");
@@ -17,6 +17,7 @@ function Clock(props) {
 
   return (
     <div className="clock flex-col-center">
+      <Tomato time={props.time}/>
       <div id="pomo-period">{period} time left:</div>
       <div id="timer-mins"> {props.time} </div>
     </div>

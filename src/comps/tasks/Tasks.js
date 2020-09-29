@@ -12,37 +12,18 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 
 function Tasks(props) {
-  const [tasklist, setTask] = useState([]);
-  const [task, setTaskName] = useState("");
-
-  const addTask = (e) => {
-    e.preventDefault();
-    if (task !== "" && !tasklist.includes(task)) {
-      setTask([...tasklist, task]);
-    }
-    setTaskName("");
-  };
-
-  const updateTaskName = (e) => {
-    setTaskName(e.target.value);
-  };
-
-  const removeTask = (index) => {
-    let updatedTasks = [...tasklist];
-    updatedTasks.splice(index, 1);
-    setTask(updatedTasks);
-  };
+      
 
   return (
     <div>
-      <form onSubmit={addTask} className="flex-col-center">
+      <form onSubmit={props.addTask} className="flex-col-center">
         <strong>Add tasks in the order you want to work on them</strong>
         <div className="flex-row-center mrgn">
           <TextField
             variant="outlined"
-            onChange={updateTaskName}
+            onChange={props.updateTaskName}
             id="task-input"
-            value={task}
+            value={props.task}
             label="task"
           />
           <button type="submit" className="btn med-btn">
@@ -52,7 +33,7 @@ function Tasks(props) {
       </form>
 
       <List>
-        {tasklist.map((val, i) => {
+        {props.tasklist.map((val, i) => {
           return (
             <div key={i}>
               <ListItem>
@@ -62,7 +43,7 @@ function Tasks(props) {
                 })}
                 <ListItemSecondaryAction
                   onClick={() => {
-                    removeTask(i);
+                    props.removeTask(i);
                   }}
                 >
                   <IconButton edge="end" aria-label="delete">
